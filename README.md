@@ -78,7 +78,29 @@ python examples/example_tool.py
 ---
 
 ### 3. Planning Pattern (ReAct) 🧠
-**Status:** 📅 Planned
+Status: ✅ Complete
+
+An implementation of the ReAct (Reasoning + Acting) pattern where the agent runs a structured loop:
+
+Thought → Action → Observation → Repeat → Final Response
+
+**Key Components:**
+- `tool_pattern/tool.py` - Function signature extraction and @tool decorator
+- `planning_pattern/react_agent.py` - Core ReAct loop implementation
+
+**What I Learned:**
+- ReAct separates reasoning from acting, making tool use reliable
+- Tool schemas must be explicit for structured function calling
+- Argument validation prevents runtime crashes from type mismatches
+- Agents must guard against malformed JSON from LLMs
+- Loop-based planning requires max-iteration safeguards
+- Proper tagging (<thought>, <tool_call>, <observation>, <response>) stabilizes agent behavior
+
+**Try it:**
+```bash
+cd agentic_patterns
+python examples/example_planning.py
+```
 
 ### 4. Multi-Agent Pattern 🧑🏽‍🤝‍🧑🏻
 **Status:** 📅 Planned
