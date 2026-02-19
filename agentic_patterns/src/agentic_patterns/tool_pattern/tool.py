@@ -113,6 +113,7 @@ def validate_arguments(tool_call: dict, tool_signature: dict) -> dict:
     return tool_call
 
 
+
 class Tool:
     """
     A wrapper that makes a Python function callable by an LLM.
@@ -211,6 +212,20 @@ def tool(fn: Callable):
     
     return wrapper()
 
+@tool
+def get_current_weather(location: str, unit: str) -> dict:
+    """
+    Mock function to get current weather for a location.
+    
+    Args:
+        location (str): The location to get weather for
+        unit (str): The unit of temperature ("celsius" or "fahrenheit")
+    
+    Returns:
+        dict: A mock weather response with temperature and unit
+    """
+    # This is just a mock. In a real implementation, you'd call a weather API.
+    return {"temperature": 25, "unit": unit, "location": location}
 
 # ============================================================================
 # EXAMPLE USAGE (for learning purposes)
