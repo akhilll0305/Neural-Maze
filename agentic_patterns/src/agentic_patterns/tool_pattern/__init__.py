@@ -1,0 +1,1 @@
+"""Tool Pattern implementation."""

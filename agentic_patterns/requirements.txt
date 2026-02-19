@@ -1,0 +1,6 @@
+# Core dependencies
+groq>=0.9.0
+python-dotenv>=1.0.0
+
+# Optional: for colored terminal output
+colorama>=0.4.6
