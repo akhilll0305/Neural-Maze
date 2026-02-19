@@ -53,8 +53,29 @@ python examples/example_reflection.py
 
 ---
 
-### 2. Tool Pattern 🛠
-**Status:** 🚧 Coming next...
+### 2. Tool Pattern 🛠️
+**Status:** ✅ Complete
+
+A pattern that enables LLMs to use external tools and functions to access real-world data and perform actions they couldn't do alone.
+
+**Key Components:**
+- `tool_pattern/tool.py` - Function signature extraction and @tool decorator
+- `tool_pattern/tool_agent.py` - Agent orchestration with dual chat histories
+
+**What I Learned:**
+- Type hints extraction creates automatic API schemas for LLMs
+- Dual chat histories pattern: one for tool selection, one clean for final answer
+- Tool calls use XML tags and JSON for structured function calling
+- LLMs can intelligently decide when to use tools vs answer directly
+- Argument validation converts string inputs to proper types (int, float, etc.)
+
+**Try it:**
+```bash
+cd agentic_patterns
+python examples/example_tool.py
+```
+
+---
 
 ### 3. Planning Pattern (ReAct) 🧠
 **Status:** 📅 Planned
@@ -65,7 +86,7 @@ python examples/example_reflection.py
 ## 🎯 Learning Goals
 
 - [x] Understand the Reflection Pattern
-- [ ] Master the Tool Pattern
+- [x] Master the Tool Pattern
 - [ ] Implement ReAct (Planning Pattern)
 - [ ] Build Multi-Agent systems
 - [ ] Create real-world applications using these patterns
@@ -81,4 +102,4 @@ This is a **learning repository**. The code is heavily commented to demonstrate 
 ---
 
 **Last Updated:** February 19, 2026  
-**Current Focus:** Reflection Pattern ✅ → Tool Pattern 🚧
+**Current Focus:** Tool Pattern ✅ → Planning Pattern 🚧
