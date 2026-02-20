@@ -140,3 +140,4 @@ This is a **learning repository**. The code is heavily commented to demonstrate 
 
 ---
 
+**Current Focus:** Agentic_patterns -> Projects based on AI Agents
