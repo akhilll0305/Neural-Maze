@@ -26,7 +26,6 @@ My_Learnings/
 └── [future projects]/         # More projects to come!
 ```
 
-## ✅ Completed Patterns
 
 ### 1. Reflection Pattern 🤔
 **Status:** ✅ Complete
@@ -103,15 +102,33 @@ python examples/example_planning.py
 ```
 
 ### 4. Multi-Agent Pattern 🧑🏽‍🤝‍🧑🏻
-**Status:** 📅 Planned
+**Status:** ✅ Complete
+A modular multi-agent orchestration system built on top of the ReAct agent.
+Implements a Crew-style architecture:
+Crew (Orchestrator)
+    ├── Researcher
+    ├── Analyst
+    └── Writer
+
+**Key Components:**
+- `multiagent_pattern/agent.py` - Agent abstraction (role + internal ReactAgent)
+- `multiagent_pattern/crew.py` - Orchestrator with dependency graph
+- Topological sorting for execution order
+- Context propagation between agents
 
 ## 🎯 Learning Goals
 
-- [x] Understand the Reflection Pattern
-- [x] Master the Tool Pattern
-- [ ] Implement ReAct (Planning Pattern)
-- [ ] Build Multi-Agent systems
-- [ ] Create real-world applications using these patterns
+- Multi-agent systems are DAG execution problems
+- Orchestration logic is separate from reasoning logic
+- Outputs become downstream context
+- Modular intelligence > monolithic prompts
+- Dependency validation prevents circular execution
+
+**Try it:**
+```bash
+cd agentic_patterns
+python examples/example_multiagent.py
+```
 
 ## 🙏 Acknowledgments
 
@@ -123,5 +140,3 @@ This is a **learning repository**. The code is heavily commented to demonstrate 
 
 ---
 
-**Last Updated:** February 19, 2026  
-**Current Focus:** Tool Pattern ✅ → Planning Pattern 🚧
