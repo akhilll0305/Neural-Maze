@@ -23,9 +23,17 @@ My_Learnings/
 │   │       ├── planning_pattern/
 │   │       └── multiagent_pattern/
 │   └── examples/              # Usage examples
+├── twin_celebrity/            # Celebrity lookalike app using vector search
+│   └── src/
+│       ├── vector_twin/       # Shared library (models, qdrant, settings)
+│       ├── embedding_pipeline/ # ZenML pipeline for generating embeddings
+│       └── app/               # Streamlit UI
 └── [future projects]/         # More projects to come!
 ```
 
+---
+
+## 🤖 Agentic Patterns
 
 ### 1. Reflection Pattern 🤔
 **Status:** ✅ Complete
@@ -77,7 +85,7 @@ python examples/example_tool.py
 ---
 
 ### 3. Planning Pattern (ReAct) 🧠
-Status: ✅ Complete
+**Status:** ✅ Complete
 
 An implementation of the ReAct (Reasoning + Acting) pattern where the agent runs a structured loop:
 
@@ -101,14 +109,19 @@ cd agentic_patterns
 python examples/example_planning.py
 ```
 
+---
+
 ### 4. Multi-Agent Pattern 🧑🏽‍🤝‍🧑🏻
 **Status:** ✅ Complete
+
 A modular multi-agent orchestration system built on top of the ReAct agent.
 Implements a Crew-style architecture:
+```
 Crew (Orchestrator)
     ├── Researcher
     ├── Analyst
     └── Writer
+```
 
 **Key Components:**
 - `multiagent_pattern/agent.py` - Agent abstraction (role + internal ReactAgent)
@@ -116,8 +129,7 @@ Crew (Orchestrator)
 - Topological sorting for execution order
 - Context propagation between agents
 
-## 🎯 Learning Goals
-
+**What I Learned:**
 - Multi-agent systems are DAG execution problems
 - Orchestration logic is separate from reasoning logic
 - Outputs become downstream context
@@ -130,6 +142,49 @@ cd agentic_patterns
 python examples/example_multiagent.py
 ```
 
+---
+
+## 🎭 Projects
+
+### 1. Twin Celebrity App 🌟
+**Status:** ✅ Complete
+
+A machine learning project that uses face embeddings and vector similarity search to find your celebrity lookalike.
+
+**Tech Stack:**
+- `facenet-pytorch` - Face detection (MTCNN) and 512-d embedding generation (InceptionResnetV1)
+- `Qdrant` - Vector database for cosine similarity search
+- `ZenML` - Pipeline orchestration for embedding generation
+- `HuggingFace Datasets` - Celebrity face dataset (`lansinuote/simple_facenet`)
+- `Streamlit` - Web UI with webcam support
+- `Docker + Google Cloud Run` - Deployment
+
+**Project Structure:**
+- `vector_twin/` - Shared library: settings, FaceNet models, Qdrant client/utils
+- `embedding_pipeline/` - ZenML pipeline: load dataset → sample → generate embeddings → store in Qdrant
+- `app/` - Streamlit UI: webcam input → face embedding → vector search → show celebrity twin
+
+**What I Learned:**
+- Face embeddings convert images into 512-d vectors that capture facial geometry
+- Vector similarity search (cosine distance) finds the nearest celebrity face in embedding space
+- Separating the pipeline (one-time data ingestion) from the app (runtime) is a clean architectural pattern
+- ZenML manages pipeline steps, caching, and Docker-based execution environments
+- `pydantic-settings` cleanly manages config from `.env` files and ZenML secret stores
+- `@lru_cache` prevents models and DB clients from being re-initialized on every request
+- Streamlit session state manages app flow between the camera view and results view
+
+**Try it:**
+```bash
+cd twin_celebrity
+# Run pipeline to populate Qdrant
+$env:PYTHONPATH = "src"
+python src/embedding_pipeline/run.py --use-qdrant-cloud
+# Run the app
+streamlit run src/app/main.py
+```
+
+---
+
 ## 🙏 Acknowledgments
 
 Learning from [Neural Maze](https://github.com/neural-maze) - Building AI Agents from scratch without frameworks.
@@ -140,4 +195,4 @@ This is a **learning repository**. The code is heavily commented to demonstrate 
 
 ---
 
-**Current Focus:** Agentic_patterns -> Projects based on AI Agents
+**Current Focus:** Projects based on AI Agents → Vector Search & Embeddings
